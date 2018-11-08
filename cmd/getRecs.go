@@ -15,6 +15,7 @@ var getRecsCmd = &cobra.Command{
 	Short: "A way to get book recommendations given a folder of book files",
 	Long: `Use --num / -n command to specify the number of recommendations desired, and --dir/-d to specify the target directory.`,
 	Run: func(cmd *cobra.Command, args []string) {
+		start := time.Now()
 		dir, _ := cmd.Flags().GetString("dir")
 		numString, _ := cmd.Flags().GetString("num")
 		num, _ := strconv.Atoi(numString)
@@ -34,6 +35,8 @@ var getRecsCmd = &cobra.Command{
 			fmt.Println("\n" + strconv.Itoa(i + 1) + ": " + book)
 		}
 		fmt.Println()
+		elapsed := time.Since(start)
+		log.Printf("Process took %s", elapsed)
 	},
 }
 

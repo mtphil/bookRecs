@@ -46,6 +46,7 @@ var getRecsCmd = &cobra.Command{
 		for i, book := range chosenBooks {
 			fmt.Println("\n" + strconv.Itoa(i) + ": " + book)
 		}
+		fmt.Println()
 	},
 }
 

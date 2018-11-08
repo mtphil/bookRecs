@@ -17,16 +17,14 @@ var getRecsCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		dir, _ := cmd.Flags().GetString("dir")
 		numString, _ := cmd.Flags().GetString("num")
-
 		num, _ := strconv.Atoi(numString)
-		files, err := ioutil.ReadDir(dir)
 
+		files, err := ioutil.ReadDir(dir)
 		if err != nil {
 			log.Fatal(err)
 		}
 
 		var titleArray []string
-		var chosenBooks []string
 
 		for _, f := range files {
 			if f.IsDir() {
@@ -36,6 +34,7 @@ var getRecsCmd = &cobra.Command{
 		}
 
 		rand.Seed(time.Now().UTC().UnixNano())
+		var chosenBooks []string
 
 		for i := 0 ; i < num; i++ {
 			newRand := rand.Intn(len(titleArray))

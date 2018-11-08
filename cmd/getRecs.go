@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"math/rand"
+	"runtime"
 	"strconv"
 	"time"
 )
@@ -51,7 +52,13 @@ func listBooksInDir(dir string) []string {
 
 	for _, f := range files {
 		if f.IsDir() {
-			titleArray = append(titleArray, listBooksInDir(dir + "/" + f.Name())...)
+			var directoryDivider string
+			if runtime.GOOS == "windows" {
+				directoryDivider = "\"
+			} else {
+				directoryDivider = "/"
+			}
+			titleArray = append(titleArray, listBooksInDir(dir + directoryDivider + f.Name())...)
 		}
 		titleArray = append(titleArray, f.Name())
 	}

@@ -3,7 +3,7 @@ a command line utility which reads from my overloaded books folder and generates
 
 usage:
 
-bookRecs getRecs -d /Directory/Name/Here -n 5
+`bookRecs getRecs -d /Directory/Name/Here -n 5`
 
-flags: --dir/-d for the name of the target directory
---num/-n for the desired number of recommendations
+flags: `--dir/-d` for the name of the target directory
+`--num/-n` for the desired number of recommendations

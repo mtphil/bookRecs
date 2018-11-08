@@ -1,6 +1,6 @@
 # bookRecs
 a command line utility which reads from my overloaded books folder and generates random recommendations
-built with cobra[https://github.com/spf13/cobra]
+built with cobra[[https://github.com/spf13/cobra]]
 
 usage:
 

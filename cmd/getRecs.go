@@ -37,7 +37,7 @@ var getRecsCmd = &cobra.Command{
 
 		rand.Seed(time.Now().UTC().UnixNano())
 
-		for i := 0 ; i <= num; i++ {
+		for i := 0 ; i < num; i++ {
 			newRand := rand.Intn(len(titleArray))
 			chosenBooks = append(chosenBooks, titleArray[newRand])
 		}

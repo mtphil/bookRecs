@@ -19,25 +19,12 @@ var getRecsCmd = &cobra.Command{
 		numString, _ := cmd.Flags().GetString("num")
 		num, _ := strconv.Atoi(numString)
 
-		files, err := ioutil.ReadDir(dir)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		var titleArray []string
-
-		for _, f := range files {
-			if f.IsDir() {
-				continue
-			}
-			titleArray = append(titleArray, f.Name())
-		}
+		titleArray := listBooksInDir(dir)
 
 		rand.Seed(time.Now().UTC().UnixNano())
 		var chosenBooks []string
 
 		for i := 0 ; i < num; i++ {
-			fmt.Println("num", num, "i", i)
 			newRand := rand.Intn(len(titleArray))
 			chosenBooks = append(chosenBooks, titleArray[newRand])
 		}
@@ -48,6 +35,23 @@ var getRecsCmd = &cobra.Command{
 		}
 		fmt.Println()
 	},
+}
+
+func listBooksInDir(dir string) []string {
+	var titleArray []string
+
+	files, err := ioutil.ReadDir(dir)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, f := range files {
+		if f.IsDir() {
+			titleArray = append(titleArray, listBooksInDir(dir + "/" + f.Name())...)
+		}
+		titleArray = append(titleArray, f.Name())
+	}
+	return titleArray
 }
 
 func init() {

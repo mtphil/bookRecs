@@ -37,13 +37,14 @@ var getRecsCmd = &cobra.Command{
 		var chosenBooks []string
 
 		for i := 0 ; i < num; i++ {
+			fmt.Println("num", num, "i", i)
 			newRand := rand.Intn(len(titleArray))
 			chosenBooks = append(chosenBooks, titleArray[newRand])
 		}
 
 		fmt.Println("\nHere are your suggestions:")
 		for i, book := range chosenBooks {
-			fmt.Println("\n" + strconv.Itoa(i) + ": " + book)
+			fmt.Println("\n" + strconv.Itoa(i + 1) + ": " + book)
 		}
 		fmt.Println()
 	},

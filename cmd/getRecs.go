@@ -54,7 +54,7 @@ func listBooksInDir(dir string) []string {
 		if f.IsDir() {
 			var directoryDivider string
 			if runtime.GOOS == "windows" {
-				directoryDivider = "\"
+				directoryDivider = `\`
 			} else {
 				directoryDivider = "/"
 			}

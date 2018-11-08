@@ -36,7 +36,7 @@ var getRecsCmd = &cobra.Command{
 		}
 		fmt.Println()
 		elapsed := time.Since(start)
-		fmt.Printf("Process took %s", elapsed)
+		fmt.Printf("Process took %s\n", elapsed)
 		fmt.Println()
 	},
 }

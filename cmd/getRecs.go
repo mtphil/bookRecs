@@ -17,9 +17,21 @@ var getRecsCmd = &cobra.Command{
 	Long: `Use --num / -n command to specify the number of recommendations desired, and --dir/-d to specify the target directory.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		start := time.Now()
-		dir, _ := cmd.Flags().GetString("dir")
-		numString, _ := cmd.Flags().GetString("num")
-		num, _ := strconv.Atoi(numString)
+		dir, err := cmd.Flags().GetString("dir")
+		if err != nil || dir == "" {
+			fmt.Println("Error: please provide target directory via -d or --dir flags")
+			return
+		}
+		numString, err := cmd.Flags().GetString("num")
+		if err != nil || numString == "" {
+			fmt.Println("Error: please provide number of books via -n or --num flags")
+			return
+		}
+		num, err := strconv.Atoi(numString)
+		if err != nil {
+			fmt.Printf("Error: please provide valid number of books via -n or --num flags: %v", err)
+			return
+		}
 
 		titleArray := listBooksInDir(dir)
 
@@ -33,11 +45,11 @@ var getRecsCmd = &cobra.Command{
 
 		fmt.Println("\nHere are your suggestions:")
 		for i, book := range chosenBooks {
-			fmt.Println("\n" + strconv.Itoa(i + 1) + ": " + book)
+			fmt.Printf("\n %s: %s", strconv.Itoa(i + 1), book)
 		}
 		fmt.Println()
 		elapsed := time.Since(start)
-		fmt.Printf("Process took %s\n", elapsed)
+		fmt.Printf("Process took %v\n", elapsed)
 		fmt.Println()
 	},
 }
